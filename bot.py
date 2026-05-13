@@ -18,7 +18,7 @@ def keep_alive():
     t.start()
 # ---------------------------------------------------------
 
-TOKEN = '8840124274:AAFJnT7Nge5uohGI_sE5Kw0zOy4q1v-Xlo0'
+TOKEN = '8840124274:AAFJnT7Nge5uohGI_sE5Kw0z0y4q1v-Xlo0'
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start', 'help'])
