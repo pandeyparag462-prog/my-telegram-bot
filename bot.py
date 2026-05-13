@@ -1,8 +1,24 @@
 import telebot
 import yt_dlp
 import os
+from flask import Flask
+from threading import Thread
 
-TOKEN = '8840124274:AAFJnT7Nge5uohGI_sE5Kw0z0y4q1v-Xlo0'
+# --- Dummy Web Server (Render aur 24/7 Uptime ke liye) ---
+app = Flask(__name__)
+@app.route('/')
+def home():
+    return "Bot mast chal raha hai 24/7!"
+
+def run_web():
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+
+def keep_alive():
+    t = Thread(target=run_web)
+    t.start()
+# ---------------------------------------------------------
+
+TOKEN = '8840124274:AAFJnT7Nge5uohGI_sE5Kw0zOy4q1v-Xlo0'
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start', 'help'])
@@ -50,5 +66,8 @@ def handle_message(message):
         except:
             pass
 
+# Pehle server start hoga, fir bot
+keep_alive()
 print("Bot chalu ho gaya hai! Telegram par jaakar test karein...")
 bot.infinity_polling()
+
